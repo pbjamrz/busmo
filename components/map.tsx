@@ -16,6 +16,8 @@ function StopIcon(stopNumber: number) {
 }
 
 export default function Map() {
+    const [hasTileError, setHasTileError] = useState(false);
+
     return (
       <MapContainer
           bounds={routePositions}
@@ -29,7 +31,16 @@ export default function Map() {
               url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               maxZoom={19}
-          />
+              eventHandlers={{
+                    tileerror: () => setHasTileError(true),
+              }}
+        />
+          {hasTileError && (
+              <p role="status"
+                 className="pointer-events-none absolute bottom-8 left-3 right-3 z-1000 rounded-lg border bg-accent text-accent-foreground px-3 p-0.5">
+                  Map tile could not load. Check your internet connection and reload the page.
+              </p>
+          )}
 
           <Polyline
             positions = {routePositions}

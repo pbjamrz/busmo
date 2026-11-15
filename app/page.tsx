@@ -23,7 +23,7 @@ function MapSection() {
   return (
     <section
       aria-label="Route map"
-      className="flex items-center justify-center relative isolate h-[clamp(280px,45svh,420px)] border-b bg-slate-100 md:h-auto md:border-b-0"
+      className="flex items-center justify-center relative isolate h-[clamp(280px,45svh,420px)] border-b bg-slate-100 md:col-start-2 md:row-start-1 md:h-auto md:min-h-105 md:border-b-0"
     >
       <MapView />
     </section>
@@ -35,7 +35,7 @@ function InfoPanel() {
     <aside
       id="bus-route-info"
       aria-labelledby="route-heading"
-      className="min-w-0 scroll-mt-4 space-y-4 p-4 wrap-anywhere md:col-start-1 md:row-start-1 md:border-r md:p-5"
+      className="scroll-mt-4 space-y-4 p-4 wrap-anywhere md:col-start-1 md:row-start-1 md:border-r md:p-5"
     >
       <Card>
         <CardHeader>
