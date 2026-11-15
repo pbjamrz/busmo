@@ -1,7 +1,10 @@
+import {useState} from "react";
 import {divIcon} from "leaflet";
-import {MapContainer, Marker, TileLayer} from "react-leaflet";
+import {MapContainer, Marker, Polyline, TileLayer} from "react-leaflet";
 
 import {stops} from "@/lib/stop-data";
+
+const routePositions = stops.map((stop) => stop.coordinates)
 
 function StopIcon(stopNumber: number) {
     return divIcon({
@@ -15,8 +18,10 @@ function StopIcon(stopNumber: number) {
 export default function Map() {
     return (
       <MapContainer
-          center={[14.525, 121.25]}
-          zoom={14}
+          bounds={routePositions}
+          boundsOptions={{
+              padding: [32, 32]
+          }}
           scrollWheelZoom={false}
           className="h-full w-full"
       >
@@ -25,6 +30,15 @@ export default function Map() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               maxZoom={19}
           />
+
+          <Polyline
+            positions = {routePositions}
+            pathOptions={{
+                color: "#2563eb",
+                weight: 5,
+            }}
+          />
+
           {stops.map((stop, index) => (
               <Marker
                 key={stop.id}

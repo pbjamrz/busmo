@@ -1,8 +1,14 @@
 # BusMo
 
+A **Bus** **Mo**nitoring app created to track the buses in Rizal.
+
 ## Installation and usage
 
-This hasn't been deployed yet so to test it out:
+This hasn't been deployed yet so to see it out:
 
-+ install dependencies with `npm install`
-+ run a local server with `npm run dev`
++ install dependencies with `npm install -D`
++ run it on a local server with `npm run dev`
+
+## Contributing
+
+To contribute, follow this branching workflow.
