@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Noto_Sans, Montserrat } from "next/font/google";
+import "leaflet/dist/leaflet.css";
 import { cn } from "@/lib/utils";
 
 const montserratHeading = Montserrat({subsets:['latin'],variable:'--font-heading'});

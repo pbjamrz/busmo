@@ -1,10 +1,9 @@
-import { ArrowDown, BusFront, Info, Map, MapPin, Route } from "lucide-react";
+import { BusFront, MapPin, Route } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import MapView from "@/components/map-view";
 
-function BusMoHeader() {
+function Header() {
   return (
     <header className="flex min-h-20 flex-wrap items-center justify-between gap-3 border-b bg-white px-4 py-4 md:px-6">
       <div className="flex min-w-0 items-center gap-3">
@@ -20,41 +19,18 @@ function BusMoHeader() {
   );
 }
 
-function MapPlaceholder() {
+function MapSection() {
   return (
     <section
-      aria-labelledby="map-heading"
-      className="relative flex h-[clamp(280px,45svh,420px)] min-w-0 items-center justify-center border-b bg-slate-100 p-5 md:col-start-2 md:row-start-1 md:h-auto md:min-h-[420px] md:border-b-0"
+      aria-label="Route map"
+      className="flex items-center justify-center relative isolate h-[clamp(280px,45svh,420px)] border-b bg-slate-100 md:h-auto md:border-b-0"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-size-[48px_48px] opacity-50"
-      />
-      <div className="relative flex max-w-sm flex-col items-center text-center">
-        <span className="mb-4 flex size-14 items-center justify-center rounded-2xl border bg-white text-primary shadow-sm">
-          <Map aria-hidden="true" className="size-7" />
-        </span>
-        <p className="mb-1 text-xs font-semibold tracking-widest text-muted-foreground uppercase">
-          UP Diliman
-        </p>
-        <h2 id="map-heading" className="text-xl font-semibold tracking-tight">
-          Campus Loop map
-        </h2>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          An interactive campus map is coming soon.
-        </p>
-        <Button asChild className="mt-5 min-h-11 whitespace-normal px-4 py-2">
-          <a href="#route-details">
-            View route details
-            <ArrowDown aria-hidden="true" />
-          </a>
-        </Button>
-      </div>
+      <MapView />
     </section>
   );
 }
 
-function RoutePanel() {
+function InfoPanel() {
   return (
     <aside
       id="bus-route-info"
@@ -70,7 +46,7 @@ function RoutePanel() {
               <h2 id="route-heading" className="text-lg font-semibold tracking-tight">
                 Rizal Bus Route
               </h2>
-              <p className="mt-1 text-sm text-muted-foreground">6 stops</p>
+              <p className="mt-1 text-sm text-muted-foreground">6 stops • Map pins are dummy locations</p>
             </div>
           </div>
         </CardHeader>
@@ -106,10 +82,10 @@ function RoutePanel() {
 export default function Home() {
   return (
     <div className="flex min-h-svh flex-col">
-      <BusMoHeader />
+      <Header />
       <main className="grid flex-1 grid-cols-1 md:grid-cols-[320px_minmax(0,1fr)]">
-        <MapPlaceholder />
-        <RoutePanel />
+        <MapSection />
+        <InfoPanel />
       </main>
     </div>
   );
