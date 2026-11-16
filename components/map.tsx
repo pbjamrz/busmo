@@ -1,21 +1,29 @@
-import {useState} from "react";
-import {divIcon} from "leaflet";
-import {MapContainer, Marker, Polyline, TileLayer} from "react-leaflet";
+import { useState } from "react";
+import { divIcon } from "leaflet";
 
-import {stops} from "@/lib/stop-data";
+import { MapContainer, Marker, Polyline, Popup, TileLayer } from "react-leaflet";
+import { stops } from "@/lib/stop-data";
 
 const routePositions = stops.map((stop) => stop.coordinates)
 
-function StopIcon(stopNumber: number) {
+function StopIcon(stopNumber: number, isSelected: boolean) {
     return divIcon({
-       className: "stop-marker",
+       className: isSelected
+            ? "stop-marker is-selected"
+            : "stop-marker",
         html: String(stopNumber),
         iconSize: [44, 44],
-        iconAnchor: [22, 22]
+        iconAnchor: [22, 22],
+        popupAnchor: [0, -22]
     });
 }
 
-export default function Map() {
+type MapProps = {
+    selectedStopId: string | null;
+    onSelectStop: (stopId: string) => void;
+};
+
+export default function Map({ selectedStopId, onSelectStop }: MapProps) {
     const [hasTileError, setHasTileError] = useState(false);
 
     return (
@@ -45,7 +53,7 @@ export default function Map() {
           <Polyline
             positions = {routePositions}
             pathOptions={{
-                color: "#2563eb",
+                color: "rgb(37 99 235 / 0.84)",
                 weight: 5,
             }}
           />
@@ -55,8 +63,27 @@ export default function Map() {
                 key={stop.id}
                 position={stop.coordinates}
                 title={`${index + 1}. ${stop.name}`}
-                icon={StopIcon(index + 1)}
-              />
+                icon={StopIcon(index + 1, selectedStopId === stop.id)}
+                eventHandlers={{
+                    click: () => onSelectStop(stop.id),
+                }}
+              >
+                  <Popup
+                    className="stop-popup"
+                    maxWidth={220}
+                    autoPanPadding={[16, 16]}
+                  >
+                    <div className="space-y-1 pr-6">
+                        <strong className="block font-semibold">
+                            {stop.name}
+                        </strong>
+                        <div>
+                            {stop.description}
+                        </div>
+                    </div>
+                  </Popup>
+
+              </Marker>
           ))}
       </MapContainer>
     );

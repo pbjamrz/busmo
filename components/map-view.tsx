@@ -1,5 +1,3 @@
-"use client";
-
 import dynamic from "next/dynamic";
 
 const Map = dynamic(() => import("./map"), {
@@ -7,6 +5,11 @@ const Map = dynamic(() => import("./map"), {
     loading: () => <p role="status">Loading map...</p>,
 });
 
-export default function MapView() {
-    return <Map />;
+type MapViewProps = {
+    selectedStopId: string | null;
+    onSelectStop: (stopId: string) => void;
+};
+
+export default function MapView({ selectedStopId, onSelectStop }: MapViewProps) {
+    return <Map selectedStopId={selectedStopId} onSelectStop={onSelectStop}/>;
 }
