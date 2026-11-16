@@ -27,7 +27,7 @@ The project uses this tech stack:
 
 If you want to contribute, a basic git workflow is:
 
-1. Create a **ticket branch** from `prod` and apply your changes.
+1. Create a **ticket branch** from `main` and apply your changes.
 2. **Open a PR** from your ticket branch to `dev`.
 3. If approved, **merge PR** into `dev`.
 4. Test changes on `dev`.
