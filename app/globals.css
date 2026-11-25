@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "leaflet/dist/leaflet.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -164,4 +165,11 @@
   height: 44px;
   font-size: 24px;
   line-height: 1;
+}
+
+/* Force Leaflet container to expand to 100% height and width */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 400px;
 }
